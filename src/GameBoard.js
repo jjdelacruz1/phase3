@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './GameBoard.css';
 
 // TODO: 
 // 1. make predictions by getting info from cycleColor function and putting it into an array.
 
-class GameBoard extends React.Component {  
+class GameBoard extends Component {  
   constructor(props) {
     super(props)
     this.state = {
