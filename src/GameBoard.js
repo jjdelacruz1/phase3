@@ -3,16 +3,26 @@ import './GameBoard.css';
 import AnswerKey from './AnswerKey'
 
 class GameBoard extends Component {  
+
   constructor(props) {
     super(props)
     this.state = {
-      secretCode: [],
+      secretCode: this.createSecretCode(),
       colorPredictions: [],
       circle1: 0,
       circle2: 0,
       circle3: 0,
       circle4: 0
     }
+  }
+
+  createSecretCode = () => {
+    const makeARandomNumber = () => {
+      return Math.floor(Math.random() * 6) + 1;
+    };
+    let randomArr = Array(4).fill(0).map(makeARandomNumber);
+    console.log("secret is: ", randomArr)
+    return randomArr
   }
 
   cycleColor = (circle, key) => {
@@ -28,18 +38,18 @@ class GameBoard extends Component {
 
   collectGuess = () => {
     let guess = this.state.colorPredictions
-    this.state.colorPredictions.push(this.state.circle1, this.state.circle2, this.state.circle3, this.state.circle4)
+    guess.push(this.state.circle1, this.state.circle2, this.state.circle3, this.state.circle4)
     if (guess.length > 4) {
       guess.length = 4
     }
-
     console.log("guess", guess)
   }
 
   render() {
-    const colorOptions = [null, 'red', 'cyan', 'green', 'orange', 'magenta', 'blue']
+    console.log("initial state is this: ", this.state)
+    const colorOptions = [null, 'red', 'cyan', 'green', 'orange', 'magenta', 'blue'] 
     let key = ""
-    return (      
+    return (     
       <div className="row container">  
         <div className="border">      
           <span type="button" className="dot"
