@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import './GameBoard.css';
-
-// TODO: 
-// 1. make predictions by getting info from cycleColor function and putting it into an array.
+import AnswerKey from './AnswerKey'
 
 class GameBoard extends Component {  
   constructor(props) {
@@ -29,8 +27,13 @@ class GameBoard extends Component {
   }
 
   collectGuess = () => {
+    let guess = this.state.colorPredictions
     this.state.colorPredictions.push(this.state.circle1, this.state.circle2, this.state.circle3, this.state.circle4)
-    console.log("guess", this.state.colorPredictions)
+    if (guess.length > 4) {
+      guess.length = 4
+    }
+
+    console.log("guess", guess)
   }
 
   render() {
@@ -39,38 +42,33 @@ class GameBoard extends Component {
     return (      
       <div className="row container">  
         <div className="border">      
-          <label type="button" className="dot"
+          <span type="button" className="dot"
             style={
               {
                 backgroundColor: colorOptions[this.state.circle1]
               }
-            } onClick={() => this.cycleColor(this.state.circle1, key="circle1")}></label>       
-          <label type="button" className="dot"
+            } onClick={() => this.cycleColor(this.state.circle1, key="circle1")}></span>       
+          <span type="button" className="dot"
             style={
               {
                 backgroundColor: colorOptions[this.state.circle2]
               }
-            } onClick={() => this.cycleColor(this.state.circle2, key="circle2")}></label> 
-          <label type="button" className="dot"
+            } onClick={() => this.cycleColor(this.state.circle2, key="circle2")}></span> 
+          <span type="button" className="dot"
             style={
               {
                 backgroundColor: colorOptions[this.state.circle3]
               }
-            } onClick={() => this.cycleColor(this.state.circle3, key="circle3")}></label> 
-          <label type="button" className="dot"
+            } onClick={() => this.cycleColor(this.state.circle3, key="circle3")}></span> 
+          <span type="button" className="dot"
             style={
               {
                 backgroundColor: colorOptions[this.state.circle4]
               }
-            } onClick={() => this.cycleColor(this.state.circle4, key="circle4")}></label> 
+            } onClick={() => this.cycleColor(this.state.circle4, key="circle4")}></span> 
           
         </div>    
-        <div className="border">
-          <span className="dot"></span>         
-          <span className="dot"></span> 
-          <span className="dot"></span> 
-          <span className="dot"></span> 
-        </div>
+        <AnswerKey />
         <button type="button" onClick={() => this.collectGuess(this.state)}>Check!</button>
       </div>
       );  
