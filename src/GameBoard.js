@@ -13,11 +13,7 @@ class GameBoard extends Component {
       circle1: 0,
       circle2: 0,
       circle3: 0,
-      circle4: 0,
-      prediction1: [],
-      prediction2: [],
-      prediction3: [],
-      prediction4: []
+      circle4: 0
     }
   }
 
@@ -30,7 +26,11 @@ class GameBoard extends Component {
     this.setState({
       [key]: nextCircleIndex
     })
-    console.log(this.state)
+  }
+
+  collectGuess = () => {
+    this.state.colorPredictions.push(this.state.circle1, this.state.circle2, this.state.circle3, this.state.circle4)
+    console.log("guess", this.state.colorPredictions)
   }
 
   render() {
@@ -71,7 +71,7 @@ class GameBoard extends Component {
           <span className="dot"></span> 
           <span className="dot"></span> 
         </div>
-        <button>Check!</button>
+        <button type="button" onClick={() => this.collectGuess(this.state)}>Check!</button>
       </div>
       );  
     }}
