@@ -7,7 +7,7 @@ class App extends Component {
   render () {
     return (
       <div className="Title">
-        <h1>Mastermind Easy Game</h1>
+        <h1>Color Code Match Game</h1>
         <Secret />
         <GameBoard />
       </div>
