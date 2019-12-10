@@ -39,9 +39,18 @@ class GameBoard extends Component {
     if (guess.includes(0)) {
       alert("This isn't working")
     }
+    // console.log("guess is: ", guess)
   }
 
-  
+  compareToSecret = () => {
+    let guess = [this.state.circle1, this.state.circle2, this.state.circle3, this.state.circle4]
+    let randomArr = this.state.secretCode
+    if (guess === randomArr) {
+      console.log("you are right!")
+    } else {
+      console.log("you are wrong!!!")
+    }
+  }
   render() {
     const colorOptions = [null, 'red', 'cyan', 'green', 'orange', 'magenta', 'blue'] 
     let key = ""
@@ -79,7 +88,7 @@ class GameBoard extends Component {
           <span className="dot"></span> 
           <span className="dot"></span> 
         </div>
-        <button type="button" onClick={() => this.collectGuess(this.state)}>Check!</button>
+        <button type="button" onClick={() => this.collectGuess(this.state), this.compareToSecret(this.state)}>Check!</button>
       </div>
       );  
     }}
