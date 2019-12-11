@@ -59,7 +59,7 @@ class GameBoard extends Component {
     const colorOptions = [null, 'red', 'cyan', 'green', 'orange', 'magenta', 'blue'] 
     let key = ""
     return (     
-      <div className="row container">  
+      <div className="container d-flex justify-content-center">  
         <div className="border">  
         {circlesArray.map(circle => {
           return (
