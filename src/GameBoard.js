@@ -7,7 +7,7 @@ class GameBoard extends Component {
     super(props)
     this.state = {
       secretCode: this.createSecretCode(),
-      answerKey: [1, 1, 1, 1],
+      answerKey: ["white", "white", "white", "white"],
       circle1: 0,
       circle2: 0,
       circle3: 0,
@@ -45,65 +45,38 @@ class GameBoard extends Component {
       let decoder = []
       for(let i = 0; i < arr1.length; i++) {
           if(arr1[i] === arr2[i]) {
-            decoder.push(0)
+            decoder.push("black")
           } else {
-            decoder.push(1)
+            decoder.push("white")
           }
       }
       console.log("new result is: ", decoder)
       this.setState({answerKey: decoder})
     }
-
-    updateDecoder(arr) {
-      for(let i = 0; i < arr.length; i++) {
-        if (this.answerKey === 1) {
-          console.log("this background should be black")
-        }
-      }
-    }
  
   render() {
+    const circlesArray = [{state: this.state.circle1, key: "circle1"}, {state: this.state.circle2, key: "circle2"}, {state:this.state.circle3, key: "circle3"}, {state:this.state.circle4, key:"circle4"}]
     const colorOptions = [null, 'red', 'cyan', 'green', 'orange', 'magenta', 'blue'] 
     let key = ""
     return (     
       <div className="row container">  
         <div className="border">  
+        {circlesArray.map(circle => {
+          return (
             <span type="button" className="dot"
             style={
               {
-                backgroundColor: colorOptions[this.state.circle1]
+                backgroundColor: colorOptions[circle.state]
               }
-            } onClick={() => this.cycleColor(this.state.circle1, key="circle1")}></span>        
-           <span type="button" className="dot"
-            style={
-              {
-                backgroundColor: colorOptions[this.state.circle2]
-              }
-            } onClick={() => this.cycleColor(this.state.circle2, key="circle2")}></span> 
-          <span type="button" className="dot"
-            style={
-              {
-                backgroundColor: colorOptions[this.state.circle3]
-              }
-            } onClick={() => this.cycleColor(this.state.circle3, key="circle3")}></span> 
-          <span type="button" className="dot"
-            style={
-              {
-                backgroundColor: colorOptions[this.state.circle4]
-              }
-            } onClick={() => this.cycleColor(this.state.circle4, key="circle4")}></span>  
+            } onClick={() => this.cycleColor(circle.state, key=circle.key)}></span>  
+          )
+        })}        
         </div>    
         <div className="border">
-          <span className="dot"
-            style={
-              {
-              backgroundColor: this.updateDecoder(this.state.answerKey[0])
-              }
-            }>
-          </span>         
-          <span className="dot"></span> 
-          <span className="dot"></span> 
-          <span className="dot"></span> 
+          <span className="dot" style={{backgroundColor: this.state.answerKey[0]}}></span>         
+          <span className="dot" style={{backgroundColor: this.state.answerKey[1]}}></span> 
+          <span className="dot" style={{backgroundColor: this.state.answerKey[2]}}></span> 
+          <span className="dot" style={{backgroundColor: this.state.answerKey[3]}}></span> 
         </div>
         <button type="button" onClick={() => {this.collectGuess(this.state); this.compareGuessToSecret(this.state.secretCode, [this.state.circle1, this.state.circle2, this.state.circle3, this.state.circle4]);}}>Check!</button>
       </div>
