@@ -13,6 +13,18 @@ class GameBoard extends Component {
       circle3: 0,
       circle4: 0
     }
+    this.addAnotherRow = this.addAnotherRow.bind(this)
+  }
+
+  addAnotherRow() {
+    this.setState({
+      secretCode: this.state.secretCode,
+      answerKey: ["white", "white", "white", "white"],
+      circle1: 0,
+      circle2: 0,
+      circle3: 0,
+      circle4: 0
+    })
   }
 
   createSecretCode() {
@@ -50,7 +62,6 @@ class GameBoard extends Component {
             decoder.push("white")
           }
       }
-      console.log("new result is: ", decoder)
       this.setState({answerKey: decoder})
     }
  
@@ -78,7 +89,9 @@ class GameBoard extends Component {
           <span className="dot" style={{backgroundColor: this.state.answerKey[2]}}></span> 
           <span className="dot" style={{backgroundColor: this.state.answerKey[3]}}></span> 
         </div>
-        <button type="button" onClick={() => {this.collectGuess(this.state); this.compareGuessToSecret(this.state.secretCode, [this.state.circle1, this.state.circle2, this.state.circle3, this.state.circle4]);}}>Check!</button>
+        <button type="button" onClick={() => {
+          this.collectGuess(this.state); 
+          this.compareGuessToSecret(this.state.secretCode, [this.state.circle1, this.state.circle2, this.state.circle3, this.state.circle4]);}}>Check!</button>
       </div>
       );  
     }
