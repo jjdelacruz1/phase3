@@ -26,8 +26,13 @@ class GameRow extends Component {
 
 
   render() {
-    this.props.handleCheck([this.state.circle1, this.state.circle2, this.state.circle3, this.state.circle4])
-    const circlesArray = [{state: this.state.circle1, key: "circle1"}, {state: this.state.circle2, key: "circle2"}, {state:this.state.circle3, key: "circle3"}, {state:this.state.circle4, key:"circle4"}]
+    const circlesArray = [
+      {state: this.state.circle1, key: "circle1"}, 
+      {state: this.state.circle2, key: "circle2"}, 
+      {state: this.state.circle3, key: "circle3"}, 
+      {state: this.state.circle4, key: "circle4"}
+    ]
+
     const colorOptions = [null, 'red', 'cyan', 'green', 'orange', 'magenta', 'blue'] 
     let key = ""
     return (
@@ -39,7 +44,15 @@ class GameRow extends Component {
               {
                 backgroundColor: colorOptions[circle.state]
               }
-            } onClick={() => this.cycleColor(circle.state, key=circle.key)}></span>  
+            } onClick={() => {
+              this.cycleColor(circle.state, key=circle.key);
+              this.props.handleCheck([
+                this.state.circle1, 
+                this.state.circle2, 
+                this.state.circle3, 
+                this.state.circle4
+              ])
+            }}></span>  
           )
         })}        
         </div>    
