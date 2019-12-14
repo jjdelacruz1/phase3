@@ -55,7 +55,12 @@ class GameBoard extends Component {
     }
  
   render() {
-    const circlesArray = [{state: this.state.circle1, key: "circle1"}, {state: this.state.circle2, key: "circle2"}, {state:this.state.circle3, key: "circle3"}, {state:this.state.circle4, key:"circle4"}]
+    const circlesArray = [
+      {state: this.state.circle1, key: "circle1"}, 
+      {state: this.state.circle2, key: "circle2"}, 
+      {state: this.state.circle3, key: "circle3"}, 
+      {state: this.state.circle4, key: "circle4"}
+    ]
     const colorOptions = [null, 'red', 'cyan', 'green', 'orange', 'magenta', 'blue'] 
     let key = ""
     return (     
@@ -78,7 +83,15 @@ class GameBoard extends Component {
           <span className="dot" style={{backgroundColor: this.state.answerKey[2]}}></span> 
           <span className="dot" style={{backgroundColor: this.state.answerKey[3]}}></span> 
         </div>
-        <button type="button" onClick={() => {this.collectGuess(this.state); this.compareGuessToSecret(this.state.secretCode, [this.state.circle1, this.state.circle2, this.state.circle3, this.state.circle4]);}}>Check!</button>
+        <button type="button" onClick={() => {
+          this.collectGuess(this.state); 
+          this.compareGuessToSecret(
+            this.state.secretCode, 
+            [this.state.circle1, 
+             this.state.circle2, 
+             this.state.circle3, 
+             this.state.circle4
+             ])}}>Check!</button>
       </div>
       );  
     }
