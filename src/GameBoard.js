@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './GameBoard.css';
+import GameRow from './GameRow';
+import { runInThisContext } from 'vm';
 
 class GameBoard extends Component {  
 
@@ -8,23 +10,12 @@ class GameBoard extends Component {
     this.state = {
       secretCode: this.createSecretCode(),
       answerKey: ["white", "white", "white", "white"],
-      circle1: 0,
-      circle2: 0,
-      circle3: 0,
-      circle4: 0
+      rowState: []
+      // circle1: 0,
+      // circle2: 0,
+      // circle3: 0,
+      // circle4: 0
     }
-    this.addAnotherRow = this.addAnotherRow.bind(this)
-  }
-
-  addAnotherRow() {
-    this.setState({
-      secretCode: this.state.secretCode,
-      answerKey: ["white", "white", "white", "white"],
-      circle1: 0,
-      circle2: 0,
-      circle3: 0,
-      circle4: 0
-    })
   }
 
   createSecretCode() {
@@ -36,15 +27,15 @@ class GameBoard extends Component {
     return randomArr
   }
 
-  cycleColor(circle, key) {
-    let nextCircleIndex = circle + 1
-    if (nextCircleIndex === 7) {
-      nextCircleIndex = 0
-    }
-    this.setState({
-      [key]: nextCircleIndex
-    })
-  }
+  // cycleColor(circle, key) {
+  //   let nextCircleIndex = circle + 1
+  //   if (nextCircleIndex === 7) {
+  //     nextCircleIndex = 0
+  //   }
+  //   this.setState({
+  //     [key]: nextCircleIndex
+  //   })
+  // }
 
   collectGuess() {
     let guess = [this.state.circle1, this.state.circle2, this.state.circle3, this.state.circle4]
@@ -62,27 +53,25 @@ class GameBoard extends Component {
             decoder.push("white")
           }
       }
+      console.log("new result is: ", decoder)
       this.setState({answerKey: decoder})
+    }
+
+    handleCheck(array) {
+      // this.setState({
+      //   ...this.state,
+      //   rowState: array
+      // })
+      console.log(array)
     }
  
   render() {
-    const circlesArray = [{state: this.state.circle1, key: "circle1"}, {state: this.state.circle2, key: "circle2"}, {state:this.state.circle3, key: "circle3"}, {state:this.state.circle4, key:"circle4"}]
-    const colorOptions = [null, 'red', 'cyan', 'green', 'orange', 'magenta', 'blue'] 
-    let key = ""
+    // const circlesArray = [{state: this.state.circle1, key: "circle1"}, {state: this.state.circle2, key: "circle2"}, {state:this.state.circle3, key: "circle3"}, {state:this.state.circle4, key:"circle4"}]
+    // const colorOptions = [null, 'red', 'cyan', 'green', 'orange', 'magenta', 'blue'] 
+    // let key = ""
     return (     
       <div className="container d-flex justify-content-center">  
-        <div className="border">  
-        {circlesArray.map(circle => {
-          return (
-            <span type="button" className="dot"
-            style={
-              {
-                backgroundColor: colorOptions[circle.state]
-              }
-            } onClick={() => this.cycleColor(circle.state, key=circle.key)}></span>  
-          )
-        })}        
-        </div>    
+        <GameRow handleCheck={this.handleCheck} foo={"foo"}/>
         <div className="border">
           <span className="dot" style={{backgroundColor: this.state.answerKey[0]}}></span>         
           <span className="dot" style={{backgroundColor: this.state.answerKey[1]}}></span> 
@@ -91,7 +80,15 @@ class GameBoard extends Component {
         </div>
         <button type="button" onClick={() => {
           this.collectGuess(this.state); 
-          this.compareGuessToSecret(this.state.secretCode, [this.state.circle1, this.state.circle2, this.state.circle3, this.state.circle4]);}}>Check!</button>
+          this.compareGuessToSecret(
+            this.state.secretCode, 
+            [
+              this.state.circle1, 
+              this.state.circle2, 
+              this.state.circle3, 
+              this.state.circle4
+            ]
+          );}}>Check!</button>
       </div>
       );  
     }
