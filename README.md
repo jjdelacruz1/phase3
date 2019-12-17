@@ -1,3 +1,5 @@
+This is the phase 3 project for the flex full stack program from DigitalCrafts course. The game initially started out as a Mastermind game, however as time went on the scope changed. This was built using create-react-app. The purpose of the game is to guess the secret code of 4 colors. This is a work in progress as well. There is still a winning function, game over function, and restart function that needs to be added. If you have ideas, let me know!!!
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
