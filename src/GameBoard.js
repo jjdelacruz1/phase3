@@ -66,6 +66,7 @@ class GameBoard extends Component {
     return (     
       <div className="container d-flex justify-content-center">  
         <div className="border">  
+        <h5>Guess Board</h5>
         {circlesArray.map(circle => {
           return (
             <span type="button" className="dot"
@@ -78,6 +79,7 @@ class GameBoard extends Component {
         })}        
         </div>    
         <div className="border">
+          <h5>Decoder</h5>
           <span className="dot" style={{backgroundColor: this.state.answerKey[0]}}></span>         
           <span className="dot" style={{backgroundColor: this.state.answerKey[1]}}></span> 
           <span className="dot" style={{backgroundColor: this.state.answerKey[2]}}></span> 

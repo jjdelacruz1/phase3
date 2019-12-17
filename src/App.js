@@ -8,7 +8,10 @@ class App extends Component {
     return (
       <div className="Title">
         <h1>Color Code Match Game</h1>
-        <Secret />
+        <h4>Guess the random 4 color code!</h4>
+        <h4>The decoder will tell you if you have the right color in the right spot.</h4>
+        <h4>Black means that it is correct. White means you are incorrect.</h4>
+        <h4>Good Luck!</h4>
         <GameBoard />
       </div>
     )
